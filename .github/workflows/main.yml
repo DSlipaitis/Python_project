@@ -1,4 +1,31 @@
-- name: Lint code
-  run: |
-    pip install flake8
-    flake8 .
+name: Python Unit Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2.2.0
+
+    - name: Set up Python
+      uses: actions/setup-python@v2.2.0
+      with:
+        python-version: 3.9
+
+    - name: Install dependencies
+      run: |
+        pip install flask
+        pip install flask_cors
+        pip install requests
+
+    - name: Run tests
+      run: |
+        python -m unittest discover -v
