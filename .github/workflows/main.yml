@@ -25,11 +25,6 @@ jobs:
         pip install flask-cors
         pip install requests
 
-    - name: Start API Server
-      run: |
-        set FLASK_APP=retrieve_data.py
-        python retrieve_data.py
-
     - name: Test API
       run: |
         python test_retrieve_data.py
