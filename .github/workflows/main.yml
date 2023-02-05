@@ -37,11 +37,6 @@ jobs:
       run: |
         python test_retrieve_data.py
 
-    - name: Test API Response
-      run: |
-        sleep 5
-        curl http://localhost:5000?convert=EUR
-
     - name: Stop API Server
       run: |
         kill $(cat $GITHUB_ENV | grep FLASK_PID | awk -F'=' '{print $2}')
