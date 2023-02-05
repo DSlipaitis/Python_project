@@ -24,6 +24,11 @@ jobs:
         pip install flask
         pip install flask-cors
         pip install requests
+        pip install pylint
+
+    - name: Lint Code
+      run: |
+        pylint retrieve_data.py test_retrieve_data.py
 
     - name: Start API Server
       run: |
