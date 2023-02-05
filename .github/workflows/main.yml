@@ -21,6 +21,7 @@ jobs:
 
     - name: Install Dependencies
       run: |
+        pip install requests_mock
         pip install flask
         pip install flask-cors
         pip install requests
