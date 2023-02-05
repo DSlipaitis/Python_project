@@ -43,24 +43,29 @@
     <script>
       document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("currency-select").addEventListener("change", function() {
-          // Get the selected currency
+           // Get the selected currency
           let selectedCurrency = document.getElementById("currency-select").value;
 
           // Fetch the cryptocurrency prices in the selected currency
-          fetch(`http://localhost:5000/?convert=${selectedCurrency}`, {
-            headers: {
-              "Content-Type": "application/json"
-            }
-          })
-            .then(response => response.json())
-            .then(data => {
-              // Update the prices in the HTML table
-              document.getElementById("price-btc").innerHTML = data.BTC.price.toFixed(4);
-              document.getElementById("price-eth").innerHTML = data.ETH.price.toFixed(4);
-              document.getElementById("price-sol").innerHTML = data.SOL.price.toFixed(4);
-            });
-        });
+        fetch(`http://localhost:5000/?convert=${selectedCurrency}`, {
+         headers: {
+          "Content-Type": "application/json"
+        }
+      })
+        .then(response => response.json())
+        .then(data => {
+         // Update the prices in the HTML table
+        document.getElementById("price-btc").innerHTML = data.BTC.price.toFixed(4);
+        document.getElementById("price-eth").innerHTML = data.ETH.price.toFixed(4);
+        document.getElementById("price-sol").innerHTML = data.SOL.price.toFixed(4);
       });
+  });
+
+  // Dispatch the change event on the "currency-select" element to make the prices appear by default when the page is loaded
+  let event = new Event("change");
+  document.getElementById("currency-select").dispatchEvent(event);
+});
+
     </script>
   </body>
 </html>
