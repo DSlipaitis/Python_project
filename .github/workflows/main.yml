@@ -27,7 +27,7 @@ jobs:
 
     - name: Test API
       run: |
-        python retrieve_data.py
+        python test_retrieve_data.py
 
     - name: Test API Response
       run: |
