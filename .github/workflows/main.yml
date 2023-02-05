@@ -25,6 +25,14 @@ jobs:
         pip install flask-cors
         pip install requests
 
+    - name: Start API Server
+      run: |
+        set FLASK_APP=retrieve_data.py
+        FLASK_PID=$!
+        flask run --port 5000 &
+
+        echo "FLASK_PID=$FLASK_PID" >> $GITHUB_ENV
+
     - name: Test API
       run: |
         python test_retrieve_data.py
@@ -33,3 +41,7 @@ jobs:
       run: |
         sleep 5
         curl http://localhost:5000?convert=EUR
+
+    - name: Stop API Server
+      run: |
+        kill $(cat $GITHUB_ENV | grep FLASK_PID | awk -F'=' '{print $2}')
