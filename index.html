@@ -8,11 +8,15 @@
   <body>
     <div class="left-sidebar">
       <nav>
-        <ul>
-          <li><a href="#">Empty</Empty></a></li>
-          <li><a href="#">Empty</a></li>
-          <li><a href="#">Empty</a></li>
-        </ul>
+        <form>
+          <label for="currency-select">Currency:</label>
+          <select id="currency-select" name="currency">
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+            <option value="JPY">JPY</option>
+          </select>
+        </form>
       </nav>
     </div>
     <div class="container">
@@ -20,7 +24,7 @@
       <table>
         <tr>
           <th>Crypto</th>
-          <th>Price (USD)</th>
+          <th>Price</th>
         </tr>
         <tr>
           <td>Bitcoin</td>
@@ -37,19 +41,26 @@
       </table>
     </div>
     <script>
-        // Fetch cryptocurrency prices from the Flask API
-        fetch("http://localhost:5000/", {
-    headers: {
-        'Content-Type': 'application/json'
-    },
-})
-.then(response => response.json())
-.then(data => {
-    // Update the prices in the HTML table
-    document.getElementById("price-btc").innerHTML = data.BTC.price.toFixed(4);
-    document.getElementById("price-eth").innerHTML = data.ETH.price.toFixed(4);
-    document.getElementById("price-sol").innerHTML = data.SOL.price.toFixed(4);
-});
-      </script>
+      document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("currency-select").addEventListener("change", function() {
+          // Get the selected currency
+          let selectedCurrency = document.getElementById("currency-select").value;
+
+          // Fetch the cryptocurrency prices in the selected currency
+          fetch(`http://localhost:5000/?convert=${selectedCurrency}`, {
+            headers: {
+              "Content-Type": "application/json"
+            }
+          })
+            .then(response => response.json())
+            .then(data => {
+              // Update the prices in the HTML table
+              document.getElementById("price-btc").innerHTML = data.BTC.price.toFixed(4);
+              document.getElementById("price-eth").innerHTML = data.ETH.price.toFixed(4);
+              document.getElementById("price-sol").innerHTML = data.SOL.price.toFixed(4);
+            });
+        });
+      });
+    </script>
   </body>
 </html>
