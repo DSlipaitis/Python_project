@@ -36,7 +36,3 @@ jobs:
     - name: Test API
       run: |
         python test_retrieve_data.py
-
-    - name: Stop API Server
-      run: |
-        kill $(cat $GITHUB_ENV | grep FLASK_PID | awk -F'=' '{print $2}')
