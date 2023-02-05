@@ -1,0 +1,33 @@
+name: CI/CD Flask API
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Install Dependencies
+      run: |
+        pip install flask
+        pip install flask-cors
+        pip install requests
+
+    - name: Test API
+      run: |
+        python retrieve_data.py
+
+    - name: Test API Response
+      run: |
+        curl http://localhost:5000?convert=EUR
