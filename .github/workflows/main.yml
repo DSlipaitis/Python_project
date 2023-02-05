@@ -31,4 +31,5 @@ jobs:
 
     - name: Test API Response
       run: |
+        sleep 5
         curl http://localhost:5000?convert=EUR
