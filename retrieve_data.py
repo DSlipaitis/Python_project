@@ -6,7 +6,7 @@ app = Flask(__name__)
 CORS(app)
 
 def retrieve_data(convert):
-    url = f"https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=BTC%2CETH%2CSOL&convert={convert}&CMC_PRO_API_KEY=4f0a6417-58ab-41f1-8770-6cf42db5d653"
+    url = f"https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=BTC%2CETH%2CSOL%2CDOGE&convert={convert}&CMC_PRO_API_KEY=4f0a6417-58ab-41f1-8770-6cf42db5d653"
     response = requests.get(url)
 
     if response.status_code == 200:
