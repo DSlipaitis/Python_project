@@ -1,31 +1,31 @@
-name: Python Unit Tests
+name: Build and Test
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+on: [push, pull_request]
+
+env:
+  CONVERT: USD
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2.2.0
+      uses: actions/checkout@v2.3.0
 
     - name: Set up Python
-      uses: actions/setup-python@v2.2.0
+      uses: actions/setup-python@v2.3.0
       with:
-        python-version: 3.9
+        python-version: 3.8
 
     - name: Install dependencies
       run: |
-        pip install flask
-        pip install flask_cors
+        pip install Flask
+        pip install Flask-CORS
         pip install requests
 
     - name: Run tests
       run: |
-        python -m unittest discover -v
+        python -m unittest discover
+      env:
+        CONVERT: ${{ env.CONVERT }}
