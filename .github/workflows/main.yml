@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-  
 
 jobs:
   build:
@@ -25,6 +24,11 @@ jobs:
         pip install flask
         pip install flask-cors
         pip install requests
+
+    - name: Start API Server
+      run: |
+        set FLASK_APP=retrieve_data.py
+        python retrieve_data.py
 
     - name: Test API
       run: |
