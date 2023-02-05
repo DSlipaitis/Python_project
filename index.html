@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Cryptocurrency Prices</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <div class="left-sidebar">
+      <nav>
+        <ul>
+          <li><a href="#">Empty</Empty></a></li>
+          <li><a href="#">Empty</a></li>
+          <li><a href="#">Empty</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="container">
+      <h1>Cryptocurrency Prices</h1>
+      <table>
+        <tr>
+          <th>Crypto</th>
+          <th>Price (USD)</th>
+        </tr>
+        <tr>
+          <td>Bitcoin</td>
+          <td id="price-btc"></td>
+        </tr>
+        <tr>
+          <td>Ethereum</td>
+          <td id="price-eth"></td>
+        </tr>
+        <tr>
+          <td>Solana</td>
+          <td id="price-sol"></td>
+        </tr>
+      </table>
+    </div>
+    <script>
+        // Fetch cryptocurrency prices from the Flask API
+        fetch("http://localhost:5000/", {
+    headers: {
+        'Content-Type': 'application/json'
+    },
+})
+.then(response => response.json())
+.then(data => {
+    // Update the prices in the HTML table
+    document.getElementById("price-btc").innerHTML = data.BTC.price.toFixed(4);
+    document.getElementById("price-eth").innerHTML = data.ETH.price.toFixed(4);
+    document.getElementById("price-sol").innerHTML = data.SOL.price.toFixed(4);
+});
+      </script>
+  </body>
+</html>
